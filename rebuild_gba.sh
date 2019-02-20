@@ -23,7 +23,7 @@ rebuild_dir="$student_dir/_rebuild_${student_dir##*/}"
 mkdir "$rebuild_dir"
 
 # Copy the student files to the rebuilt directory
-#  Although rebuild_dir is a child, cp does not recurse and throws warning
+# Although rebuild_dir is a child, cp does not recurse and throws warning
 cp -r "$student_dir"/* "$rebuild_dir/" 2> /dev/null # Hide warning
 rmdir "$rebuild_dir/${rebuild_dir##*/}" # Remove stub of recursive copy
 
