@@ -2,9 +2,15 @@
 
 # Handle argument for user Makefile
 if [[ "$1" != "" ]]; then
-	user_makefile="$1"
+	user_makefile="${1%%Makefile}"
 else
 	echo "No user Makefile passed as argument"
+	exit 1
+fi
+
+# Ensure user has a Makefile here
+if [[ ! -e "$user_makefile/Makefile" ]]; then
+	echo "No Makefile at $user_makefile"
 	exit 1
 fi
 
