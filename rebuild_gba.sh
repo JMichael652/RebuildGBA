@@ -15,6 +15,14 @@ else
 	student_dir="$(pwd)"
 fi
 
+# Ensure student has a Makefile here
+if [[ ! -e "$student_dir/Makefile" ]]; then
+	echo "No student Makefile at $student_dir"
+	echo "This tool does not support Makefiles at non-root locations"
+	exit 1
+fi
+	
+
 # Demonstrate results
 printf "User Makefile: %s, Student Directory: %s\n" "$user_makefile" "$student_dir"
 
