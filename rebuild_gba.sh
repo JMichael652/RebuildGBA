@@ -34,6 +34,10 @@ printf "User Makefile: %s, Student Directory: %s\n" "$user_makefile" "$student_d
 
 # Make the directory to store the rebuilt project
 rebuild_dir="$student_dir/_rebuild_${student_dir##*/}"
+# If folder already exists, remove all remnants of previous rebuild
+if [[ -e "$rebuild_dir" ]]; then
+	rm -r "$rebuild_dir"
+fi
 mkdir "$rebuild_dir"
 
 # Copy the student files to the rebuilt directory
