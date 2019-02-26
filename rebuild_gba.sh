@@ -54,3 +54,9 @@ printf "Student sources: %s\n" "$student_src"
 awk -v var="$student_src" '/^SOURCES/ { print var; next } 1' \
 	"$user_makefile/Makefile" > "$rebuild_dir/Makefile"
 
+# Clean the rebuilt directory
+make clean -C "$rebuild_dir"
+
+# Build the project
+make build -C "$rebuild_dir"
+
