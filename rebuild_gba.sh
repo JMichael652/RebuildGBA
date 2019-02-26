@@ -9,18 +9,23 @@ if [[ ! -e "$config_path" ]]; then
 	echo "user_makefile=" > "$config_path"
 fi
 
-# Handle argument for user Makefile
-if [[ "$1" != "" ]]; then
-	user_makefile="${1%%Makefile}"
-else
-	echo "No user Makefile passed as argument"
-	exit 1
-fi
+# Handle reading in user Makefile
+user_makefile=$(awk '/^user_makefile=/{print}' "$config_path")
+user_makefile=${user_makefile##user_makefile=}
 
 # Ensure user has a Makefile here
 if [[ ! -e "$user_makefile/Makefile" ]]; then
-	echo "No Makefile at $user_makefile"
-	exit 1
+	while [[ ! -e "$user_makefile/Makefile" ]]; do
+		# Show error only if not first config setting
+		if [[ -n "$user_makefile" ]]; then
+			echo "No Makefile at $user_makefile"
+		fi
+		read -p "Path to working Makefile for this system: " \
+			user_makefile
+		user_makefile=$(realpath "$user_makefile")
+		user_makefile=${user_makefile%%Makefile}
+	done
+	echo "user_makefile=$user_makefile" > "$config_path"
 fi
 
 # Handle argument for student project path
