@@ -1,5 +1,14 @@
 #!/bin/bash
 
+# Find path to .config file
+config_path=${0/%rebuild_gba.sh/.config}
+printf "Path to config: %s\n" "$config_path"
+
+# Create .config if none present
+if [[ ! -e "$config_path" ]]; then
+	echo "user_makefile=" > "$(pwd)/$config_path"
+fi
+
 # Handle argument for user Makefile
 if [[ "$1" != "" ]]; then
 	user_makefile="${1%%Makefile}"
