@@ -16,7 +16,7 @@ fi
 
 # Handle argument for student project path
 if [[ "$2" != "" ]]; then
-	student_dir="$2"
+	student_dir="${2%%/}"
 else
 	student_dir="$(pwd)"
 fi
