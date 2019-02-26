@@ -45,3 +45,12 @@ mkdir "$rebuild_dir"
 cp -r "$student_dir"/* "$rebuild_dir/" 2> /dev/null # Hide warning
 rm -r "$rebuild_dir/${rebuild_dir##*/}" # Remove stub of recursive copy
 
+# Obtain SOURCES from student Makefile
+student_src=$(awk '/^SOURCES/{print}' "$student_dir/Makefile")
+printf "Student sources: %s\n" "$student_src"
+
+# Replace rebuild_dir/Makefile with user Makefile and student Makefile SOURCES
+# Code snippet taken from https://stackoverflow.com/a/28232494
+awk -v var="$student_src" '/^SOURCES/ { print var; next } 1' \
+	"$user_makefile/Makefile" > "$rebuild_dir/Makefile"
+
