@@ -3,7 +3,7 @@
 # Find path to .config file
 config_path=$(realpath "$0")
 config_path=${config_path/%rebuild_gba.sh/.rbgba-config}
-printf "Path to config: %s\n" "$config_path"
+# debug: printf "Path to config: %s\n" "$config_path"
 
 # Create .config if none present
 if [[ ! -e "$config_path" ]]; then
@@ -44,7 +44,7 @@ if [[ ! -e "$student_dir/Makefile" ]]; then
 fi
 
 # Demonstrate results
-printf "User Makefile: %s, Student Directory: %s\n" "$user_makefile" "$student_dir"
+# debug: printf "User Makefile: %s, Student Directory: %s\n" "$user_makefile" "$student_dir"
 
 # Make the directory to store the rebuilt project
 rebuild_dir="$student_dir/_rebuild_${student_dir##*/}"
@@ -62,7 +62,7 @@ rm -r "$rebuild_dir/${rebuild_dir##*/}" # Remove stub of recursive copy
 
 # Obtain SOURCES from student Makefile
 student_src=$(awk '/^SOURCES/{print}' "$student_dir/Makefile")
-printf "Student sources: %s\n" "$student_src"
+# debug: printf "Student sources: %s\n" "$student_src"
 
 # Replace rebuild_dir/Makefile with user Makefile and student Makefile SOURCES
 # Code snippet taken from https://stackoverflow.com/a/28232494
