@@ -30,8 +30,8 @@ if [[ ! -e "$user_makefile/Makefile" ]]; then
 fi
 
 # Handle argument for student project path
-if [[ "$2" != "" ]]; then
-	student_dir="${2%%/}"
+if [[ "$1" != "" ]]; then
+	student_dir=$(realpath "$1")
 else
 	student_dir="$(pwd)"
 fi
