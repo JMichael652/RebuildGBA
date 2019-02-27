@@ -1,6 +1,0 @@
-RebuildGBA is a project aimed at automating a common task for a CS 2261 TA:
-rebuilding a student's code with 1) the TA's Makefile, and 2) the student's
-code and Makefile SOURCES. Typically, this involves a lot of manually copying
-files and copy-pasting lines from the Makefile. When complete, this project
-will contain a script that reduces those tasks to a single terminal command.
-
