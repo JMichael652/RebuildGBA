@@ -1,7 +1,8 @@
 #!/bin/bash
 
 # Find path to .config file
-config_path="$(pwd)/${0/%rebuild_gba.sh/.config}"
+config_path=$(realpath "$0")
+config_path=${config_path/%rebuild_gba.sh/.config}
 printf "Path to config: %s\n" "$config_path"
 
 # Create .config if none present
